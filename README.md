@@ -1,4 +1,4 @@
 # montyplusplus-frontend
 Dr. Benjamin Sanders
 
-![San]("assets/Sanders.png")
+![Sanders](assets/Sanders.png)
