@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - MontyPlusPlus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MontyPlusPlus</h1>
+        </header>
+
+        <main>
+            <div class="profile-card">
+                <h2>User Profile</h2>
+
+                <div class="profile-info">
+                    <div class="info-row">
+                        <span class="label">Name</span>
+                        <span class="value" id="user-name">John Doe</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="label">Email</span>
+                        <span class="value" id="user-email">john@example.com</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="label">Current Rank</span>
+                        <span class="value rank">Gold III</span>
+                    </div>
+                </div>
+
+                <div class="record-section">
+                    <h3>Record</h3>
+                    <div class="record-bar">
+                        <div class="record-wins" style="width: 65%;">15 Wins</div>
+                        <div class="record-losses" style="width: 35%;">8 Losses</div>
+                    </div>
+                    <p>23 Matches Played</p>
+                </div>
+
+
+                <button id="logout-btn">Log Out</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 MontyPlusPlus</p>
+        </footer>
+    </div>
+</body>
+<script>
+    let logout = document.getElementById('logout-btn');
+    logout.addEventListener('click', () => {
+        window.location.href = 'landing.html';
+    });
+</script>
+</html>

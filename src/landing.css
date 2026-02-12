@@ -71,6 +71,12 @@ main {
     bottom: 62%;
 }
 
+.profile-button {
+    position: relative;
+    right: 600px;
+    bottom: 62%;
+}
+
 footer {
     width: 100%;
     padding: 20px 0;

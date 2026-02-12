@@ -1,0 +1,141 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    margin: 20px 0;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #e5bb00;
+    font-weight: 600;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.profile-card {
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 16px;
+    padding: 50px 60px;
+    width: 600px;
+    box-shadow: 0 0 30px rgba(229, 187, 0, 0.2);
+}
+
+.profile-card h2 {
+    color: #e5bb00;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.profile-info {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #444;
+}
+
+.label {
+    color: #aaa;
+    font-weight: 600;
+}
+
+.value {
+    color: #fff;
+}
+
+.rank {
+    color: #f3cc1c;
+    font-weight: bold;
+}
+
+.record-section {
+    margin-bottom: 30px;
+}
+
+.record-section h3 {
+    color: #e5bb00;
+    margin-bottom: 15px;
+}
+
+.record-bar {
+    display: flex;
+    height: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #333;
+    margin-bottom: 10px;
+}
+
+.record-bar div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    transition: width 0.5s ease;
+}
+
+.record-wins {
+    background-color: #4CAF50; /* green */
+}
+
+.record-losses {
+    background-color: #F44336; /* red */
+}
+
+button {
+    --btn-scale: 0.6;
+    font-size: calc(1.5rem * var(--btn-scale));
+    padding: calc(1.2em * var(--btn-scale)) calc(2.5em * var(--btn-scale));
+    border: calc(0.12em * var(--btn-scale)) solid #e5bb00;
+    border-radius: 999em;
+    background-color: transparent;
+    color: #e5bb00;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: #f3cc1c;
+    color: #1a1a1a;
+    box-shadow: 0 0 calc(1.2em * var(--btn-scale)) #f3cc1c;
+}
+
+footer {
+    width: 100%;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #888;
+}
