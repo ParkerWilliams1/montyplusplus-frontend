@@ -1,0 +1,100 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    text-align: center;
+}
+
+button {
+    --btn-scale: 1;
+
+    font-size: calc(1.5rem * var(--btn-scale));
+    padding: calc(1.2em * var(--btn-scale)) calc(2.5em * var(--btn-scale));
+    border: calc(0.12em * var(--btn-scale)) solid #e5bb00;
+    border-radius: 999em;
+    background-color: transparent;
+    color: #e5bb00;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+button:hover {
+    background-color: #f3cc1c;
+    color: #1a1a1a;
+    box-shadow: 0 0 calc(1.2em * var(--btn-scale)) #f3cc1c;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: #e5bb00;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+main {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 800px;
+}
+
+.leaderboard {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+    transition: background 0.3s ease;
+}
+
+.leaderboard-row:hover {
+    background-color: #222;
+}
+
+.rank {
+    color: #e5bb00;
+    font-weight: bold;
+}
+
+.username {
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.score {
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    color: #888;
+}
