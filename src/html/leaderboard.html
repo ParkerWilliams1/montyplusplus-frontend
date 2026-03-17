@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MontyPlusPlus — Leaderboard</title>
+  <link rel="stylesheet" href="./main.css">
+  <style>
+    .lb-hero {
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem 2rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .lb-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .lb-heading {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.375rem;
+    }
+
+    .lb-sub {
+      font-size: 0.875rem;
+      color: var(--text-2);
+    }
+
+    .lb-body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .lb-table-wrap {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .lb-row {
+      display: grid;
+      grid-template-columns: 52px 1fr 100px 60px 60px 80px;
+      align-items: center;
+      padding: 0.875rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+      gap: 0.5rem;
+    }
+
+    .lb-row:last-child {
+      border-bottom: none;
+    }
+
+    .lb-row:hover {
+      background: var(--bg-2);
+    }
+
+    .lb-header {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding: 0.625rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 52px 1fr 100px 60px 60px 80px;
+      gap: 0.5rem;
+      background: var(--bg);
+    }
+
+    .lb-rank {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-3);
+    }
+
+    .lb-rank.top-1 { color: var(--accent); }
+    .lb-rank.top-2 { color: #aaa; }
+    .lb-rank.top-3 { color: #cd7f32; }
+
+    .lb-name {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .lb-rating {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .lb-wins {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--green);
+    }
+
+    .lb-losses {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--red);
+    }
+
+    .lb-winrate {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--text-2);
+    }
+
+    .lb-empty {
+      padding: 3rem;
+      text-align: center;
+      color: var(--text-3);
+      font-size: 0.875rem;
+    }
+
+    .lb-error {
+      padding: 3rem;
+      text-align: center;
+      color: var(--red);
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/app.html" class="nav-logo">Monty<span>++</span></a>
+    <div class="nav-right">
+      <a href="/app.html" class="btn btn-ghost btn-sm">Play</a>
+    </div>
+  </nav>
+
+  <div class="lb-hero">
+    <div class="lb-eyebrow">Rankings</div>
+    <h1 class="lb-heading">Leaderboard</h1>
+    <p class="lb-sub">Top competitors ranked by rating.</p>
+  </div>
+
+  <div class="lb-body">
+    <div class="lb-table-wrap">
+      <div class="lb-header">
+        <span>#</span>
+        <span>Player</span>
+        <span>Rating</span>
+        <span>W</span>
+        <span>L</span>
+        <span>Win rate</span>
+      </div>
+      <div id="lb-rows">
+        <div class="lb-empty">Loading rankings...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./leaderboard.bundle.js"></script>
+</body>
+</html>

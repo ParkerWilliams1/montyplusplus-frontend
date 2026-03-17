@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MontyPlusPlus</title>
+  <link rel="stylesheet" href="./main.css">
+  <style>
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-user-name {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-2);
+    }
+
+    .screen {
+      min-height: calc(100vh - 52px);
+    }
+
+    .lobby-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .lobby-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 0.75rem;
+    }
+
+    .lobby-heading {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .lobby-sub {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      margin-bottom: 2.5rem;
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .mode-card {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      text-align: left;
+    }
+
+    .mode-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-2);
+    }
+
+    .mode-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-glow-2);
+    }
+
+    .mode-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .mode-card.selected .mode-card-icon {
+      background: var(--accent-glow);
+    }
+
+    .mode-card-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      font-family: var(--mono);
+    }
+
+    .mode-card.selected .mode-card-name {
+      color: var(--accent-2);
+    }
+
+    .mode-card-desc {
+      font-size: 0.75rem;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    .lobby-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .waiting-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .waiting-ring {
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+
+    .waiting-ring svg {
+      animation: spin 1.2s linear infinite;
+    }
+
+    .waiting-ring-track {
+      stroke: var(--bg-3);
+    }
+
+    .waiting-ring-fill {
+      stroke: var(--accent);
+      stroke-dasharray: 150 50;
+      stroke-linecap: round;
+    }
+
+    .waiting-text {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .waiting-mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-glow-2);
+      border: 1px solid var(--accent-glow);
+      border-radius: 100px;
+      padding: 0.3rem 0.875rem;
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      color: var(--accent-2);
+      letter-spacing: 0.04em;
+    }
+
+    .waiting-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.5s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .waiting-sub {
+      font-size: 0.82rem;
+      color: var(--text-2);
+    }
+
+    .game-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      height: calc(100vh - 52px);
+    }
+
+    .game-problem {
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .game-problem::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .game-problem::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .game-problem::-webkit-scrollbar-thumb {
+      background: var(--bg-3);
+      border-radius: 2px;
+    }
+
+    .game-problem-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .game-problem-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.5rem;
+    }
+
+    .problem-text {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    .problem-format {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      background: var(--bg-2);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .test-case {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .test-case + .test-case {
+      margin-top: 0.5rem;
+    }
+
+    .test-case-header {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding: 0.5rem 0.875rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-1);
+    }
+
+    .test-case-body {
+      padding: 0.75rem 0.875rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .test-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+
+    .test-row-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-3);
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      min-width: 44px;
+      flex-shrink: 0;
+    }
+
+    .test-row pre {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .game-editor {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    .editor-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-1);
+      gap: 1rem;
+    }
+
+    .editor-lang {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .editor-lang-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00b4f0;
+    }
+
+    #timer {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-2);
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.625rem;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      min-width: 58px;
+      text-align: center;
+    }
+
+    #timer.urgent {
+      color: var(--red);
+      border-color: rgba(239,68,68,0.3);
+      background: var(--red-bg);
+    }
+
+    #code-input {
+      flex: 1;
+      resize: none;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      tab-size: 2;
+      font-family: var(--mono);
+      border: none;
+      border-radius: 0;
+      background: var(--bg);
+      padding: 1.25rem;
+    }
+
+    #code-input:focus {
+      box-shadow: none;
+      border-color: transparent;
+    }
+
+    .editor-footer {
+      padding: 0.875rem 1.25rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .editor-footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .editor-status-area {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+
+    #opponent-status {
+      font-size: 0.78rem;
+      color: var(--yellow);
+      font-family: var(--mono);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    #opponent-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--yellow);
+      display: inline-block;
+      animation: pulse 1.5s ease infinite;
+    }
+
+    .result-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .result-badge {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .result-badge.win {
+      background: var(--green-bg);
+      border: 2px solid rgba(34,197,94,0.3);
+      box-shadow: 0 0 40px var(--green-bg);
+    }
+
+    .result-badge.loss {
+      background: var(--red-bg);
+      border: 2px solid rgba(239,68,68,0.3);
+    }
+
+    .result-badge.draw {
+      background: var(--bg-2);
+      border: 2px solid var(--border);
+    }
+
+    .result-heading {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .result-heading.win { color: var(--green); }
+    .result-heading.loss { color: var(--red); }
+    .result-heading.draw { color: var(--text-2); }
+
+    .result-reason {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      font-family: var(--mono);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 860px) {
+      .game-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .game-problem {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        max-height: 45vh;
+      }
+      .game-editor {
+        height: 55vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-logo">Monty<span>++</span></div>
+    <div class="nav-right">
+      <span class="nav-user-name" id="user-name"></span>
+      <a href="/leaderboard.html" class="btn btn-ghost btn-sm">Leaderboard</a>
+      <a href="/profile.html" class="btn btn-ghost btn-sm" id="profile-btn">Profile</a>
+      <button id="logout-btn" class="btn btn-ghost btn-sm">Sign out</button>
+    </div>
+  </nav>
+
+  <div id="screen-lobby" class="screen">
+    <div class="lobby-wrap">
+      <div class="lobby-eyebrow">Ready to compete</div>
+      <h1 class="lobby-heading">Find a match</h1>
+      <p class="lobby-sub">Choose a game mode and enter the queue. You'll be matched with an opponent instantly.</p>
+
+      <div id="lobby-flash" class="flash flash-error hidden" style="margin-bottom:1.25rem;"></div>
+
+      <div class="mode-grid">
+        <div class="mode-card selected" data-mode="speed">
+          <div class="mode-card-icon">⚡</div>
+          <div class="mode-card-name">Speed</div>
+          <div class="mode-card-desc">First correct solution wins</div>
+        </div>
+        <div class="mode-card" data-mode="golf">
+          <div class="mode-card-icon">⛳</div>
+          <div class="mode-card-name">Golf</div>
+          <div class="mode-card-desc">5 min · fewest bytes wins</div>
+        </div>
+        <div class="mode-card" data-mode="trials">
+          <div class="mode-card-icon">🏎</div>
+          <div class="mode-card-name">Trials</div>
+          <div class="mode-card-desc">5 min · fastest runtime wins</div>
+        </div>
+      </div>
+
+      <div class="lobby-actions">
+        <button id="find-match-btn" class="btn btn-primary">Find match</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="screen-waiting" class="screen hidden">
+    <div class="waiting-screen">
+      <div class="waiting-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle class="waiting-ring-track" cx="32" cy="32" r="28" stroke-width="3" fill="none"/>
+          <circle class="waiting-ring-fill" cx="32" cy="32" r="28" stroke-width="3" fill="none" stroke-dashoffset="0"/>
+        </svg>
+      </div>
+      <div>
+        <div class="waiting-text">Searching for opponent</div>
+        <div class="waiting-sub" style="margin-top:0.375rem;">This usually takes a few seconds</div>
+      </div>
+      <div class="waiting-mode-pill">
+        <div class="waiting-dot"></div>
+        <span id="waiting-mode"></span>
+      </div>
+      <button id="cancel-btn" class="btn btn-ghost">Cancel</button>
+    </div>
+  </div>
+
+  <div id="screen-game" class="screen hidden">
+    <div class="game-layout">
+      <div class="game-problem">
+        <div class="game-problem-header">
+          <div class="game-problem-title" id="game-title"></div>
+          <span class="badge badge-purple" id="game-mode"></span>
+        </div>
+        <div>
+          <div class="section-label">Problem</div>
+          <div class="problem-text" id="game-description"></div>
+        </div>
+        <div>
+          <div class="section-label">Input</div>
+          <div class="problem-format" id="game-input-format"></div>
+        </div>
+        <div>
+          <div class="section-label">Output</div>
+          <div class="problem-format" id="game-output-format"></div>
+        </div>
+        <div>
+          <div class="section-label">Examples</div>
+          <div id="game-examples"></div>
+        </div>
+      </div>
+
+      <div class="game-editor">
+        <div class="editor-topbar">
+          <div class="editor-lang">
+            <div class="editor-lang-dot"></div>
+            C++17
+          </div>
+          <div id="timer" class="hidden">05:00</div>
+        </div>
+        <textarea id="code-input" spellcheck="false" placeholder="#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    return 0;
+}"></textarea>
+        <div class="editor-footer">
+          <div class="editor-status-area">
+            <div id="submit-status" class="flash hidden"></div>
+            <div id="opponent-status" class="hidden"></div>
+          </div>
+          <div class="editor-footer-actions">
+            <div id="game-flash" class="flash hidden" style="flex:1;"></div>
+            <button id="submit-btn" class="btn btn-primary">Submit solution</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-result" class="screen hidden">
+    <div class="result-screen">
+      <div class="result-badge" id="result-badge"></div>
+      <div class="result-heading" id="result-heading"></div>
+      <div class="result-reason" id="result-reason"></div>
+      <div class="result-actions">
+        <button id="play-again-btn" class="btn btn-primary">Play again</button>
+        <button id="back-lobby-btn" class="btn btn-ghost">Back to lobby</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MontyPlusPlus — Verify Email</title>
+  <link rel="stylesheet" href="./main.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .verify-box {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .verify-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .verify-icon.loading {
+      background: var(--bg-2);
+      border: 2px solid var(--border);
+    }
+
+    .verify-icon.success {
+      background: rgba(229,187,0,0.1);
+      border: 2px solid rgba(229,187,0,0.3);
+      box-shadow: 0 0 40px rgba(229,187,0,0.1);
+    }
+
+    .verify-icon.error {
+      background: var(--red-bg);
+      border: 2px solid rgba(239,68,68,0.3);
+    }
+
+    .verify-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .verify-sub {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .logo {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.75rem;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <a href="/auth.html" class="logo">Monty<span>++</span></a>
+
+  <div class="verify-box">
+    <div class="verify-icon loading" id="icon">
+      <span class="spinner"></span>
+    </div>
+    <div class="verify-heading" id="heading">Verifying...</div>
+    <div class="verify-sub" id="sub">Please wait a moment.</div>
+    <div id="action"></div>
+  </div>
+
+  <script src="./verify.bundle.js"></script>
+</body>
+</html>
