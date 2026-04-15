@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MontyPlusPlus — Achievements</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&family=MedievalSharp&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="achievements.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">
+    <span class="logo-icon">&#9889;</span>
+    MontyPlusPlus
+  </a>
+  <nav>
+    <a href="#">Problems</a>
+    <a href="#" class="active">Achievements</a>
+    <a href="#">Leaderboard</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Your Quest Log</div>
+  <h1 class="hero-title">Brave <span>Achievements</span>, Sir Coder</h1>
+  <p class="hero-sub">None shall pass without earning their keep. Unlock achievements by conquering problems, bravely running away, and asking about swallows.</p>
+  <div class="progress-wrap">
+    <div class="progress-label">4 of 12 unlocked</div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+  <button class="filter-btn" onclick="filterCards('unlocked', this)">Unlocked</button>
+  <button class="filter-btn" onclick="filterCards('locked', this)">Locked</button>
+  <button class="filter-btn" onclick="filterCards('legendary', this)">Legendary</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  <span>&#169; 2026 MontyPlusPlus</span>
+  <span>We are the knights who say... Accepted.</span>
+</footer>
+
+<script src="achievements.js"></script>
+</body>
+</html>

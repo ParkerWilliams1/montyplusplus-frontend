@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competitive Coding Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-icon">&#9889;</span>
+    MontyPlusPlus
+  </div>
+  <div class="header-meta">
+    <span class="difficulty-badge">easy</span>
+    <span class="lang-badge">C++17</span>
+  </div>
+</header>
+
+<main>
+  <!-- PROBLEM PANEL -->
+  <div class="problem-panel">
+    <div class="panel-tabs">
+      <button class="tab active" data-tab="description">Description</button>
+      <button class="tab" data-tab="submissions">Submissions</button>
+    </div>
+
+    <!-- DESCRIPTION TAB -->
+    <div class="tab-panel active" id="tab-description">
+      <div class="panel-content">
+        <h2 class="problem-title">Two Sum</h2>
+        <div class="problem-meta">
+          <span class="meta-tag">array</span>
+          <span class="meta-tag">hash table</span>
+        </div>
+
+        <div class="problem-body">
+          <p>Given an array of integers <code class="inline-code">nums</code> and an integer <code class="inline-code">target</code>, return the indices of the two numbers that add up to <code class="inline-code">target</code>.</p>
+          <p>You may assume that each input has exactly one solution, and you may not use the same element twice. You can return the answer in any order.</p>
+
+          <h3>Example 1</h3>
+          <div class="example-block">
+            <div class="example-label">Input</div>
+            <pre class="example-code">nums = [2,7,11,15], target = 9</pre>
+            <div class="example-label">Output</div>
+            <pre class="example-code">[0,1]</pre>
+            <div class="example-label">Explanation</div>
+            <pre class="example-code">nums[0] + nums[1] == 9, so [0,1].</pre>
+          </div>
+
+          <h3>Example 2</h3>
+          <div class="example-block">
+            <div class="example-label">Input</div>
+            <pre class="example-code">nums = [3,2,4], target = 6</pre>
+            <div class="example-label">Output</div>
+            <pre class="example-code">[1,2]</pre>
+          </div>
+
+          <h3>Constraints</h3>
+          <ul class="constraint-list">
+            <li>2 ≤ nums.length ≤ 10⁴</li>
+            <li>-10⁹ ≤ nums[i] ≤ 10⁹</li>
+            <li>-10⁹ ≤ target ≤ 10⁹</li>
+            <li>Only one valid answer exists.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBMISSIONS TAB -->
+    <div class="tab-panel" id="tab-submissions">
+      <div class="panel-content">
+        <div class="submissions-empty" id="submissions-empty">
+          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 12h6m-6 4h6m-6 4h6m-6 4h6m6-16h6m-6 4h6m-6 4h6m-6 4h6" />
+          </svg>
+          <div>No submissions yet</div>
+        </div>
+        <div id="submissions-rows"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITOR PANEL -->
+  <div class="editor-panel">
+    <div class="editor-section">
+      <div class="editor-header">
+        <div class="editor-title">Solution.cpp</div>
+        <div class="editor-actions">
+          <button class="action-btn" id="reset-btn">Reset</button>
+          <button class="action-btn action-btn-run" id="run-btn">Run</button>
+          <button class="action-btn action-btn-submit" id="submit-btn">Submit</button>
+        </div>
+      </div>
+
+      <div class="editor-wrapper">
+        <div class="line-numbers" id="line-numbers"></div>
+        <textarea id="code-input" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off">#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // Write your solution here
+
+    }
+};
+</textarea>
+      </div>
+    </div>
+
+    <div class="console-section">
+      <div class="console-wrapper">
+        <div class="console-header">
+          <div class="console-left">
+            <span class="status-dot" id="status-dot"></span>
+            <span class="console-label" id="output-label">Console</span>
+          </div>
+          <div class="console-tabs">
+            <button class="console-tab active" id="tab-stdout">stdout</button>
+            <button class="console-tab" id="tab-stderr">stderr</button>
+            <button class="clear-btn" id="clear-btn">clear</button>
+          </div>
+        </div>
+        <pre id="output-display">Ready. Write your solution and click Run or Submit.</pre>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-info">
+    <span id="cursor-pos">Ln 1, Col 1</span>
+    <span id="char-count">10 lines</span>
+  </div>
+  <span>&copy; 2026 MontyPlusPlus</span>
+</footer>
+
+<script src="editor.js"></script>
+</body>
+</html>
